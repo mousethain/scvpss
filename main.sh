@@ -27,9 +27,9 @@ ISP=$(wget -qO- ipinfo.io/org)
 CITY=$(curl -s ipinfo.io/city)
 TIME=$(date +'%Y-%m-%d %H:%M:%S')
 RAMMS=$(free -m | awk 'NR==2 {print $2}')
-REPO="https://raw.githubusercontent.com/manssizz/scriptvps/master/"
+REPO="https://raw.githubusercontent.com/mousethain/scvpss/main/"
 APT="apt-get -y install "
-domain=$(cat /etc/cendrawasih/domain)
+domain=$(cat /etc/mousevpndom/domain)
 start=$(date +%s)
 secs_to_human() {
     echo "Installation time : $((${1} / 3600)) hours $(((${1} / 60) % 60)) minute's $((${1} % 60)) seconds"
@@ -77,8 +77,8 @@ function first_setup(){
     wget -O /etc/ssh/sshd_config ${REPO}config/sshd_config >/dev/null 2>&1
     wget -q -O /etc/ipserver "${REPO}server/ipserver" && bash /etc/ipserver >/dev/null 2>&1
     chmod 644 /etc/ssh/sshd_config
-    useradd -M cendrawasih
-    usermod -aG sudo,cendrawasih cendrawasih 
+    useradd -M mousevpn
+    usermod -aG sudo,mousevpn mousevpn
 
     echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
     echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
@@ -94,19 +94,19 @@ function base_package() {
     sysctl -w net.ipv6.conf.default.disable_ipv6=1  >/dev/null 2>&1
     # sudo apt install  -y
     curl -sSL https://deb.nodesource.com/setup_16.x | bash - >/dev/null 2>&1
-    sudo apt update 
+    apt update 
 
     # linux-tools-common util-linux build-essential dirmngr libxml-parser-perl \
     # lsb-release software-properties-common coreutils rsyslog \
 
-    sudo apt install  squid3 nginx zip pwgen netcat bash-completion \
+    apt install  squid3 nginx zip pwgen netcat bash-completion \
     curl socat xz-utils wget apt-transport-https dnsutils screen chrony \
     tar wget ruby zip unzip p7zip-full python3-pip libc6  gnupg gnupg2 gnupg1  \
     msmtp-mta ca-certificates bsd-mailx iptables iptables-persistent netfilter-persistent \
     iftop bzip2 gzip lsof bc htop sed openssl wireguard-tools stunnel4 \
     tmux python2.7 vnstat nodejs libsqlite3-dev cron wondershaper \
     net-tools  jq openvpn easy-rsa python3-certbot-nginx p7zip-full tuned fail2ban -y
-    apt-get clean all; sudo apt-get autoremove -y
+    apt-get clean all; apt-get autoremove -y
     print_ok "Berhasil memasang paket yang dibutuhkan"
 }
 clear
@@ -116,15 +116,15 @@ function dir_xray() {
     print_install "Membuat direktori xray"
     mkdir -p /etc/xray
     mkdir -p /var/log/xray/
-    mkdir -p /etc/cendrawasih/{database,public_html,theme}
-    touch /etc/cendrawasih/install.log
+    mkdir -p /etc/mousevpn/{database,public_html,theme}
+    touch /etc/mousevpn/install.log
     touch /var/log/xray/{access.log,error.log}
     chmod 777 /var/log/xray/*.log
-    touch /etc/cendrawasih/database/vmess/vmess.db
-    touch /etc/cendrawasih/database/vless/vless.db
-    touch /etc/cendrawasih/database/trojan/trojan.db
-    touch /etc/cendrawasih/database/ssh/ssh.db
-    touch /etc/cendrawasih/database/shadowsocks/shadowsocks.db
+    touch /etc/mousevpn/database/vmess/vmess.db
+    touch /etc/mousevpn/database/vless/vless.db
+    touch /etc/mousevpn/database/trojan/trojan.db
+    touch /etc/mousevpn/database/ssh/ssh.db
+    touch /etc/mousevpn/database/shadowsocks/shadowsocks.db
     clear
 }
 
@@ -133,14 +133,14 @@ function add_domain() {
     echo "`cat /etc/banner`"
     read -rp "Input Your Domain For This Server:" -e SUB_DOMAIN
     echo "Host : $SUB_DOMAIN"
-    echo $SUB_DOMAIN > /etc/cendrawasih/domain
-    cp /etc/cendrawasih/domain /etc/xray/domain
+    echo $SUB_DOMAIN > /etc/mousevpndom/domain
+    cp /etc/mousevpndom/domain /etc/xray/domain
 }
 
 ### Pasang SSL
 function pasang_ssl() {
     print_install "Memasang SSL pada domain"
-    domain=$(cat /etc/cendrawasih/domain)
+    domain=$(cat /etc/mousevpndom/domain)
     STOPWEBSERVER=$(lsof -i:80 | cut -d' ' -f1 | awk 'NR==2 {print $1}')
     rm -rf /root/.acme.sh
     mkdir /root/.acme.sh
@@ -174,8 +174,8 @@ function install_websocket(){
 ### Install Xray
 function install_xray(){
     domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
-    chown cendrawasih.cendrawasih $domainSock_dir
-    chown cendrawasih.cendrawasih /var/log/xray
+    chown mousevpn.mousevpn $domainSock_dir
+    chown mousevpn.mousevpn /var/log/xray
     print_install "Memasang modul Xray terbaru"
     curl -s ipinfo.io/city >> /etc/xray/city
     curl -s ipinfo.io/org | cut -d " " -f 2-10 >> /etc/xray/isp
@@ -261,7 +261,7 @@ function install_slowdns(){
     print_install "Memasang modul SlowDNS Server"
     wget -q -O /tmp/nameserver "${REPO}slowdns/nameserver" >/dev/null 2>&1
     chmod +x /tmp/nameserver
-    bash /tmp/nameserver | tee /etc/cendrawasih/install.log
+    bash /tmp/nameserver | tee /etc/mousevpn/install.log
     print_success "SlowDNS"
 }
 
@@ -295,7 +295,7 @@ chmod 644 /etc/stunnel/stunnel.conf
 
         openssl genrsa -out key.pem 2048
         openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
-        -subj "/C=ID/ST=Jakarta/L=Jakarta/O=Cendrawasih/OU=CendrawasihTunnel/CN=Cendrawasih/emailAddress=taibabi@cendrawasih.com"
+        -subj "/C=ID/ST=Jakarta/L=Jakarta/O=Mousevpn/OU=MouseVpnTunnel/CN=mousevpn/emailAddress=mousethain@gmail.com"
         cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
         chmod 600 /etc/stunnel/stunnel.pem
 
