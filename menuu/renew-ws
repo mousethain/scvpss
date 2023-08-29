@@ -1,12 +1,12 @@
 #!/bin/bash
 # //====================================================
 # //	System Request:Debian 9+/Ubuntu 18.04+/20+
-# //	Author:	bhoikfostyahya
+# //	Author:	mousevpn
 # //	Dscription: Xray Menu Management
-# //	email: admin@bhoikfostyahya.com
-# //  telegram: https://t.me/bhoikfost_yahya
+# //	email: mousethain@gmail.com
+# //  telegram: https://t.me/mousethain
 # //====================================================
-# // font color configuration | BHOIKFOST YAHYA AUTOSCRIPT
+# // font color configuration | MouseVpn AUTOSCRIPT
 red() { echo -e "\\033[32;1m${*}\\033[0m"; }
 clear
 NUMBER_OF_CLIENTS=$(grep -c -E "^#&# " "/etc/xray/config.json")
