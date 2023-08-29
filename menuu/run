@@ -27,7 +27,7 @@ freq=$(awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo)
 cores=$(awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo)
 cname=$(awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo)
 Exp="Never Expired"
-Name="Cendrawasih Tunnel"
+Name="MouseVpn Tunnel"
 Open_SSH=$(systemctl status ssh | grep active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g')
 Dropbear=$(systemctl status dropbear | grep active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g')
 Dropbear_Websocket=$(systemctl status dropbear | grep active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g')
