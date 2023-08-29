@@ -143,8 +143,8 @@ vlesslink4="vless://${uuid}@${domain}:80?path=http://tsel.me/worryfree&encryptio
 systemctl restart xray
 systemctl reload nginx
 service cron restart
-if [ ! -e /etc/cendrawasih/database/vless ]; then
-  mkdir -p /etc/cendrawasih/database/vless
+if [ ! -e /etc/mousevpn/database/vless ]; then
+  mkdir -p /etc/mousevpn/database/vless
 fi
 
 if [ -z ${Quota} ]; then
