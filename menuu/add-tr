@@ -1,12 +1,12 @@
 #!/bin/bash
 # //====================================================
 # //  System Request:Debian 9+/Ubuntu 18.04+/20+
-# //  Author: bhoikfostyahya
+# //  Author: MouseVpn
 # //  Dscription: Xray Menu Management
-# //  email: admin@bhoikfostyahya.com
-# //  telegram: https://t.me/bhoikfost_yahya
+# //  email: mousethain@gmail.com
+# //  telegram: https://t.me/mousethain
 # //====================================================
-# // font color configuration | BHOIKFOST YAHYA AUTOSCRIPT
+# // font color configuration | MouseVpn AUTOSCRIPT
 red() { echo -e "\\033[32;1m${*}\\033[0m"; }
 domain=$(cat /etc/xray/domain)
 PUB=$(cat /etc/slowdns/server.pub)
@@ -43,14 +43,13 @@ sed -i '/#trojanws$/a\#! '"$user $exp"'\
 },{"password": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#trojangrpc$/a\#! '"$user $exp"'\
 },{"password": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-cat >/etc/cendrawasih/public_html/trojan-$user.txt <<-END
+cat >/etc/mousevpn/public_html/trojan-$user.txt <<-END
 ====================================================================
-             P R O J E C T  O F  C E N D R A W A S I H
-                       [Freedom Internet]
+                            mousevpn
 ====================================================================
-        https://github.com/manssizz/scriptvps
+             https://github.com/mousethain/scvpss
 ====================================================================
-              Format Trojan GO/WS (CDN)
+                  Format Trojan GO/WS (CDN)
 ====================================================================
 
 - name: Trojan-$user-GO/WS (CDN)
@@ -98,8 +97,8 @@ systemctl reload nginx
 service cron restart
 trojanlink="trojan://${uuid}@${domain}:443?path=%2Ftrojan-ws&security=tls&host=${domain}&type=ws&sni=${domain}#${user}"
 trojanlink1="trojan://${uuid}@${domain}:443?mode=gun&security=tls&type=grpc&serviceName=trojan-grpc&sni=${domain}#${user}"
-if [ ! -e /etc/cendrawasih/database/trojan ]; then
-  mkdir -p /etc/cendrawasih/database/trojan
+if [ ! -e /etc/mousevpn/database/trojan ]; then
+  mkdir -p /etc/mousevpn/database/trojan
 fi
 
 if [ -z ${Quota} ]; then
@@ -110,37 +109,37 @@ c=$(echo "${Quota}" | sed 's/[^0-9]*//g')
 d=$((${c} * 1024 * 1024 * 1024))
 
 if [[ ${c} != "0" ]]; then
-  echo "${d}" >/etc/cendrawasih/database/trojan/${user}
+  echo "${d}" >/etc/mousevpn/database/trojan/${user}
 fi
-DATADB=$(cat /etc/cendrawasih/database/trojan/trojan.db | grep "^###" | grep -w "${user}" | awk '{print $2}')
+DATADB=$(cat /etc/mousevpn/database/trojan/trojan.db | grep "^###" | grep -w "${user}" | awk '{print $2}')
 if [[ "${DATADB}" != '' ]]; then
-  sed -i "/\b${user}\b/d" /etc/cendrawasih/database/trojan/trojan.db
+  sed -i "/\b${user}\b/d" /etc/mousevpn/database/trojan/trojan.db
 fi
-echo "### ${user} ${exp} ${uuid}" >>/etc/cendrawasih/database/trojan/trojan.db
+echo "### ${user} ${exp} ${uuid}" >>/etc/mousevpn/database/trojan/trojan.db
 clear
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "\e[42m    Xray/Trojan Account    \E[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Remarks     : ${user}" | tee -a /etc/cendrawasih/user.log
-echo -e "Host        : ${domain}" | tee -a /etc/cendrawasih/user.log
-echo -e "Host Slowdns: ${NS}" | tee -a /etc/cendrawasih/user.log
-echo -e "Pub Key     : ${PUB}" | tee -a /etc/cendrawasih/user.log
-echo -e "Location    : $CITY" | tee -a /etc/cendrawasih/user.log
-echo -e "User Quota  : ${Quota} GB" | tee -a /etc/cendrawasih/user.log
-echo -e "Port DNS    : 443, 53 " | tee -a /etc/cendrawasih/user.log
-echo -e "Port TLS    : 443" | tee -a /etc/cendrawasih/user.log
-echo -e "port        : 443" | tee -a /etc/cendrawasih/user.log
-echo -e "Key         : ${uuid}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Link WS    : ${trojanlink}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Link GRPC  : ${trojanlink1}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Format OpenClash : https://${domain}:81/trojan-$user.txt" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Expired On : $exp" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "" | tee -a /etc/cendrawasih/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "\e[42m    Xray/Trojan Account    \E[0m" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Remarks     : ${user}" | tee -a /etc/mousevpn/user.log
+echo -e "Host        : ${domain}" | tee -a /etc/mousevpn/user.log
+echo -e "Host Slowdns: ${NS}" | tee -a /etc/mousevpn/user.log
+echo -e "Pub Key     : ${PUB}" | tee -a /etc/mousevpn/user.log
+echo -e "Location    : $CITY" | tee -a /etc/mousevpn/user.log
+echo -e "User Quota  : ${Quota} GB" | tee -a /etc/mousevpn/user.log
+echo -e "Port DNS    : 443, 53 " | tee -a /etc/mousevpn/user.log
+echo -e "Port TLS    : 443" | tee -a /etc/mousevpn/user.log
+echo -e "port        : 443" | tee -a /etc/mousevpn/user.log
+echo -e "Key         : ${uuid}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Link WS    : ${trojanlink}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Link GRPC  : ${trojanlink1}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Format OpenClash : https://${domain}:81/trojan-$user.txt" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Expired On : $exp" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "" | tee -a /etc/mousevpn/user.log
 read -n 1 -s -r -p "Press any key to back on menu"
 
 menu
