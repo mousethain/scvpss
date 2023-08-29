@@ -1,12 +1,12 @@
 #!/bin/bash
 # //====================================================
 # //  System Request:Debian 9+/Ubuntu 18.04+/20+
-# //  Author: bhoikfostyahya
+# //  Author: mousevpn
 # //  Dscription: Xray Menu Management
-# //  email: admin@bhoikfostyahya.com
-# //  telegram: https://t.me/bhoikfost_yahya
+# //  email: mousethain@gmail.com
+# //  telegram: https://t.me/mousethain
 # //====================================================
-# // font color configuration | BHOIKFOST YAHYA AUTOSCRIPT
+# // font color configuration | MouseVpn AUTOSCRIPT
 red() { echo -e "\\033[32;1m${*}\\033[0m"; }
 TIMES="10"
 domain=$(cat /etc/xray/domain)
@@ -106,17 +106,16 @@ VMESS_OPOK=`cat<<EOF
       "tls": "none" 
 } 
 EOF`
-cat >/etc/cendrawasih/public_html/vmess-$user.txt <<-END
+cat >/etc/mousevpn/public_html/vmess-$user.txt <<-END
 ====================================================================
-             P R O J E C T  O F  C E N D R A W A S I H
-                       [Freedom Internet]
+                           mousevpn
 ====================================================================
-        https://github.com/manssizz/scriptvps
+        https://github.com/mousethain/scvss
 ====================================================================
               Format Vmess WS (CDN)
 ====================================================================
 
-- name: Cendrawasih-Vmess-$user-WS (CDN)
+- name: mousevpn-Vmess-$user-WS (CDN)
   type: vmess
   server: ${domain}
   port: 443
@@ -136,7 +135,7 @@ _______________________________________________________
               Format Vmess WS (CDN) Non TLS
 _______________________________________________________
 
-- name: Cendrawasih-$user-WS (CDN) Non TLS
+- name: mousevpn-$user-WS (CDN) Non TLS
   type: vmess
   server: ${domain}
   port: 80
@@ -156,7 +155,7 @@ _______________________________________________________
               Format Vmess gRPC (SNI)
 _______________________________________________________
 
-- name: Cendrawasih-$user-gRPC (SNI)
+- name: mousevpn-$user-gRPC (SNI)
   server: ${domain}
   port: 443
   type: vmess
@@ -174,7 +173,7 @@ _______________________________________________________
         Format Vmess WS (CDN) Non TLS Opok
 _______________________________________________________
 
-- name: Cendrawasih-$user-WS (CDN) Non TLS
+- name: mousevpn-$user-WS (CDN) Non TLS
   type: vmess
   server: ${domain}
   port: 80
@@ -252,8 +251,8 @@ systemctl restart xray
 systemctl reload nginx
 service cron restart
 
-if [ ! -e /etc/cendrawasih/database/vmess ]; then
-  mkdir -p /etc/cendrawasih/database/vmess
+if [ ! -e /etc/mousevpn/database/vmess ]; then
+  mkdir -p /etc/mousevpn/database/vmess
 fi
 
 if [ -z ${Quota} ]; then
@@ -264,48 +263,48 @@ c=$(echo "${Quota}" | sed 's/[^0-9]*//g')
 d=$((${c} * 1024 * 1024 * 1024))
 
 if [[ ${c} != "0" ]]; then
-  echo "${d}" >/etc/cendrawasih/database/vmess/${user}
+  echo "${d}" >/etc/mousevpn/database/vmess/${user}
 fi
-DATADB=$(cat /etc/cendrawasih/database/vmess/vmess.db | grep "^###" | grep -w "${user}" | awk '{print $2}')
+DATADB=$(cat /etc/mousevpn/database/vmess/vmess.db | grep "^###" | grep -w "${user}" | awk '{print $2}')
 if [[ "${DATADB}" != '' ]]; then
-  sed -i "/\b${user}\b/d" /etc/cendrawasih/database/vmess/vmess.db
+  sed -i "/\b${user}\b/d" /etc/mousevpn/database/vmess/vmess.db
 fi
-echo "### ${user} ${exp} ${uuid}" >>/etc/cendrawasih/database/vmess/vmess.db
+echo "### ${user} ${exp} ${uuid}" >>/etc/mousevpn/database/vmess/vmess.db
 clear
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "\e[42m    Xray/Vmess Account     \E[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Remarks      : ${user}" | tee -a /etc/cendrawasih/user.log
-echo -e "Domain       : ${domain}" | tee -a /etc/cendrawasih/user.log
-echo -e "Host Slowdns : ${NS}" | tee -a /etc/cendrawasih/user.log
-echo -e "Pub Key      : ${PUB}" | tee -a /etc/cendrawasih/user.log
-echo -e "Location     : $CITY" | tee -a /etc/cendrawasih/user.log
-echo -e "User Quota   : ${Quota} GB" | tee -a /etc/cendrawasih/user.log
-echo -e "Port TLS     : 443" | tee -a /etc/cendrawasih/user.log
-echo -e "Port NTLS    : 80, 8080, 2086" | tee -a /etc/cendrawasih/user.log
-echo -e "Port DNS     : 443, 53 " | tee -a /etc/cendrawasih/user.log
-echo -e "Port GRPC    : 443" | tee -a /etc/cendrawasih/user.log
-echo -e "User ID      : ${uuid}" | tee -a /etc/cendrawasih/user.log
-echo -e "AlterId      : 0" | tee -a /etc/cendrawasih/user.log
-echo -e "Security     : auto" | tee -a /etc/cendrawasih/user.log
-echo -e "Network      : WS or gRPC" | tee -a /etc/cendrawasih/user.log
-echo -e "Path TLS     : (/multi path) " | tee -a /etc/cendrawasih/user.log
-echo -e "Path NLS     : (/multi path) " | tee -a /etc/cendrawasih/user.log
-echo -e "Path Dynamic : CF-XRAY:http://bug.com " | tee -a /etc/cendrawasih/user.log
-echo -e "ServiceName  : vmess-grpc" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Link TLS     : ${vmesslink1}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Link NTLS    : ${vmesslink2}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Link GRPC    : ${vmesslink3}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Link OPOK    : ${vmesslink4}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Format OpenClash : https://${domain}:81/vmess-$user.txt" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Expired On : $exp" | tee -a /etc/cendrawasih/user.log
-echo -e "" | tee -a /etc/cendrawasih/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "\e[42m    Xray/Vmess Account     \E[0m" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Remarks      : ${user}" | tee -a /etc/mousevpn/user.log
+echo -e "Domain       : ${domain}" | tee -a /etc/mousevpn/user.log
+echo -e "Host Slowdns : ${NS}" | tee -a /etc/mousevpn/user.log
+echo -e "Pub Key      : ${PUB}" | tee -a /etc/mousevpn/user.log
+echo -e "Location     : $CITY" | tee -a /etc/mousevpn/user.log
+echo -e "User Quota   : ${Quota} GB" | tee -a /etc/mousevpn/user.log
+echo -e "Port TLS     : 443" | tee -a /etc/mousevpn/user.log
+echo -e "Port NTLS    : 80, 8080, 2086" | tee -a /etc/mousevpn/user.log
+echo -e "Port DNS     : 443, 53 " | tee -a /etc/mousevpn/user.log
+echo -e "Port GRPC    : 443" | tee -a /etc/mousevpn/user.log
+echo -e "User ID      : ${uuid}" | tee -a /etc/mousevpn/user.log
+echo -e "AlterId      : 0" | tee -a /etc/mousevpn/user.log
+echo -e "Security     : auto" | tee -a /etc/mousevpn/user.log
+echo -e "Network      : WS or gRPC" | tee -a /etc/mousevpn/user.log
+echo -e "Path TLS     : (/multi path) " | tee -a /etc/mousevpn/user.log
+echo -e "Path NLS     : (/multi path) " | tee -a /etc/mousevpn/user.log
+echo -e "Path Dynamic : CF-XRAY:http://bug.com " | tee -a /etc/mousevpn/user.log
+echo -e "ServiceName  : vmess-grpc" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Link TLS     : ${vmesslink1}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Link NTLS    : ${vmesslink2}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Link GRPC    : ${vmesslink3}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Link OPOK    : ${vmesslink4}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Format OpenClash : https://${domain}:81/vmess-$user.txt" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Expired On : $exp" | tee -a /etc/mousevpn/user.log
+echo -e "" | tee -a /etc/mousevpn/user.log
 read -n 1 -s -r -p "Press any key to back on menu"
 
 menu
