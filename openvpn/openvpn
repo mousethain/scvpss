@@ -8,7 +8,7 @@ ADDR="s/xxxxxxxxx/$DOMAIN/g";
 function ovpn_install() {
     rm -rf /etc/openvpn
     mkdir -p /etc/openvpn
-    wget -O /etc/openvpn/vpn.zip "https://raw.githubusercontent.com/manssizz/scriptvps/master/openvpn/vpn.zip" >/dev/null 2>&1 
+    wget -O /etc/openvpn/vpn.zip "https://raw.githubusercontent.com/mousethain/scvpss/master/openvpn/vpn.zip" >/dev/null 2>&1 
     unzip -d /etc/openvpn/ /etc/openvpn/vpn.zip
     rm -f /etc/openvpn/vpn.zip
     chown -R root:root /etc/openvpn/server/easy-rsa/
@@ -33,7 +33,7 @@ function make_follow() {
     echo 1 > /proc/sys/net/ipv4/ip_forward
     sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 cat > /etc/openvpn/$DOMAIN-tcp.ovpn <<-END
-############ Cendrawasih Tunnel ############ 
+############ MouseVpn Tunnel ############ 
 client
 dev tun
 proto tcp
@@ -64,7 +64,7 @@ END
     
     sed -i $ADDR /etc/openvpn/$DOMAIN-tcp.ovpn;
 cat > /etc/openvpn/$DOMAIN-udp.ovpn <<-END
-############ Cendrawasih Tunnel ############ 
+############ MouseVpn Tunnel ############ 
 client
 dev tun
 proto udp
@@ -87,7 +87,7 @@ END
     
     sed -i $ADDR /etc/openvpn/$DOMAIN-udp.ovpn;
 cat > /etc/openvpn/$DOMAIN-ws-ssl.ovpn <<-END
-############ Cendrawasih Tunnel ############ 
+############ MouseVpn Tunnel ############ 
 client
 dev tun
 proto tcp
@@ -109,7 +109,7 @@ verb 3
 END
     sed -i $ADDR /etc/openvpn/$DOMAIN-ws-ssl.ovpn;
 cat > /etc/openvpn/$DOMAIN-ssl.ovpn <<-END
-############ Cendrawasih Tunnel ############ 
+############ MouseVpn Tunnel ############ 
 client
 dev tun
 proto tcp
@@ -133,7 +133,7 @@ END
 
 #### Konfigurasi OHP 
 cat > /etc/openvpn/$DOMAIN-tcp-ohp.ovpn <<-END
-############ Cendrawasih Tunnel ############ 
+############ MouseVpn Tunnel ############ 
 client
 dev tun
 proto tcp
@@ -179,11 +179,11 @@ function cert_ovpn() {
     echo '<ca>' >> /etc/openvpn/$DOMAIN-tcp-ohp.ovpn
     cat /etc/openvpn/server/ca.crt >> /etc/openvpn/$DOMAIN-tcp-ohp.ovpn
     echo '</ca>' >> /etc/openvpn/$DOMAIN-tcp-ohp.ovpn
-    cp /etc/openvpn/$DOMAIN-tcp.ovpn /etc/cendrawasih/public_html/$DOMAIN-tcp.ovpn
-    cp /etc/openvpn/$DOMAIN-udp.ovpn /etc/cendrawasih/public_html/$DOMAIN-udp.ovpn
-    cp /etc/openvpn/$DOMAIN-ws-ssl.ovpn /etc/cendrawasih/public_html/$DOMAIN-ws-ssl.ovpn
-    cp /etc/openvpn/$DOMAIN-ws-ssl.ovpn /etc/cendrawasih/public_html/$DOMAIN-ssl.ovpn
-    cp /etc/openvpn/$DOMAIN-tcp-ohp.ovpn /etc/cendrawasih/public_html/$DOMAIN-tcp-ohp.ovpn
+    cp /etc/openvpn/$DOMAIN-tcp.ovpn /etc/mousevpn/public_html/$DOMAIN-tcp.ovpn
+    cp /etc/openvpn/$DOMAIN-udp.ovpn /etc/mousevpn/public_html/$DOMAIN-udp.ovpn
+    cp /etc/openvpn/$DOMAIN-ws-ssl.ovpn /etc/mousevpn/public_html/$DOMAIN-ws-ssl.ovpn
+    cp /etc/openvpn/$DOMAIN-ws-ssl.ovpn /etc/mousevpn/public_html/$DOMAIN-ssl.ovpn
+    cp /etc/openvpn/$DOMAIN-tcp-ohp.ovpn /etc/mousevpn/public_html/$DOMAIN-tcp-ohp.ovpn
 
 }
 
