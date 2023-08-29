@@ -1,12 +1,12 @@
 #!/bin/bash
 # //====================================================
 # //	System Request:Debian 9+/Ubuntu 18.04+/20+
-# //	Author:	bhoikfostyahya
+# //	Author:	mousevpn
 # //	Dscription: Xray Menu Management
-# //	email: admin@bhoikfostyahya.com
-# //  telegram: https://t.me/bhoikfost_yahya
+# //	email: mousethain@gmail.com
+# //  telegram: https://t.me/mousethain
 # //====================================================
-# // font color configuration | BHOIKFOST YAHYA AUTOSCRIPT
+# // font color configuration | MouseVpn AUTOSCRIPT
 RED='\033[0;31m'
 NC='\033[0m'
 GREEN='\033[0;32m'
@@ -40,9 +40,9 @@ function get_acme_domain() {
     /.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc >/dev/null 2>&1
     echo -e "${GREEN}--->${NC}     Renew cert done "
     sed -i "s/${LAST_DOMAIN}/${domain}/g" /etc/nginx/conf.d/xray.conf >/dev/null 2>&1
-    sed -i "s/${LAST_DOMAIN}/${domain}/g" /etc/cendrawasih/public_html/index.html >/dev/null 2>&1
+    sed -i "s/${LAST_DOMAIN}/${domain}/g" /etc/mousevpn/public_html/index.html >/dev/null 2>&1
     sed -i "s/${LAST_DOMAIN}/${domain}/g" /etc/haproxy/haproxy.cfg >/dev/null 2>&1
-    cat /etc/xray/xray.crt /etc/xray/xray.key | tee /etc/haproxy/cendrawasih.pem >/dev/null 2>&1
+    cat /etc/xray/xray.crt /etc/xray/xray.key | tee /etc/haproxy/mousevpn.pem >/dev/null 2>&1
     systemctl daemon-reload >/dev/null 2>&1
     systemctl reload server >/dev/null 2>&1
     systemctl reload client >/dev/null 2>&1
@@ -56,13 +56,13 @@ function get_acme_domain() {
     menu
 }
 ns_domain_cloudflare() {
-    DOMAINNS="cendrawasih.net"
+    DOMAINNS="mousevpn.site"
     DAOMIN=$(cat /etc/xray/domain)
     SUB=$(tr </dev/urandom -dc a-z0-9 | head -c6)
-    SUB_DOMAIN=${SUB}."cendrawasih.net"
+    SUB_DOMAIN=${SUB}."mousevpn.site"
     NS_DOMAIN=ns.${SUB_DOMAIN}
-    CF_ID=nuryahyamuhaimin@gmail.com
-    CF_KEY=9dd2f30c099dbcf541cbd5c188d61ce060cf7
+    CF_ID=mousethain@gmail.com
+    CF_KEY=NfHzdxOCGzj6a6DkPaRq4XJhdtbaX783U5bVdjHX
     set -euo pipefail
     IP=$(wget -qO- ipinfo.io/ip)
     ZONE=$(
