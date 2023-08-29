@@ -2,12 +2,12 @@
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 ###########- COLOR CODE -##############
-colornow=$(cat /etc/cendrawasih/theme/color.conf)
+colornow=$(cat /etc/mousevpn/theme/color.conf)
 export NC="\e[0m"
 export YELLOW='\033[0;33m';
 export RED="\033[0;31m" 
-export COLOR1="$(cat /etc/cendrawasih/theme/$colornow | grep -w "TEXT" | cut -d: -f2|sed 's/ //g')"
-export COLBG1="$(cat /etc/cendrawasih/theme/$colornow | grep -w "BG" | cut -d: -f2|sed 's/ //g')"                    
+export COLOR1="$(cat /etc/mousevpn/theme/$colornow | grep -w "TEXT" | cut -d: -f2|sed 's/ //g')"
+export COLBG1="$(cat /etc/mousevpn/theme/$colornow | grep -w "BG" | cut -d: -f2|sed 's/ //g')"                    
 ###########- END COLOR CODE -##########
 
 # echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Remove Old Script"
@@ -18,6 +18,6 @@ export COLBG1="$(cat /etc/cendrawasih/theme/$colornow | grep -w "BG" | cut -d: -
 
 # sleep 2
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Download Changelog File"
-wget -q -O /etc/cendrawasih/changelog.md "https://raw.githubusercontent.com/manssizz/scriptvps/master/master/server/changelog.md" 
+wget -q -O /etc/mousevpn/changelog.md "https://raw.githubusercontent.com/mousethain/scvpss/main/master/server/changelog.md" 
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Read Changelog? ./root/changelog.txt"
 sleep 2
