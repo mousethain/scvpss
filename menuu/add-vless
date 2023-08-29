@@ -1,12 +1,12 @@
 #!/bin/bash
 # //====================================================
 # //  System Request:Debian 9+/Ubuntu 18.04+/20+
-# //  Author: bhoikfostyahya
+# //  Author: mousevpn
 # //  Dscription: Xray Menu Management
-# //  email: admin@bhoikfostyahya.com
-# //  telegram: https://t.me/bhoikfost_yahya
+# //  email: mousethain@gmail.com
+# //  telegram: https://t.me/mousethain
 # //====================================================
-# // font color configuration | BHOIKFOST YAHYA AUTOSCRIPT
+# // font color configuration | mousevpn AUTOSCRIPT
 red() { echo -e "\\033[32;1m${*}\\033[0m"; }
 domain=$(cat /etc/xray/domain)
 PUB=$(cat /etc/slowdns/server.pub)
@@ -44,17 +44,16 @@ sed -i '/#vless$/a\#& '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#vlessgrpc$/a\#& '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-cat >/etc/cendrawasih/public_html/vless-$user.txt <<-END
+cat >/etc/mousevpn/public_html/vless-$user.txt <<-END
 ====================================================================
-             P R O J E C T  O F  C E N D R A W A S I H
-                       [Freedom Internet]
+                          mousevpn
 ====================================================================
-        https://github.com/manssizz/scriptvps
+            https://github.com/mousethain/scvpss
 ====================================================================
-              Format Vless WS (CDN)
+                   Format Vless WS (CDN)
 ====================================================================
 
-- name: Cendrawasih-$user-WS (CDN)
+- name: mousevpn-$user-WS (CDN)
   server: ${domain}
   port: 443
   type: vless
@@ -72,7 +71,7 @@ cat >/etc/cendrawasih/public_html/vless-$user.txt <<-END
 _______________________________________________________
               Format Vless WS (CDN) Non TLS
 _______________________________________________________
-- name: Cendrawasih-$user-WS (CDN) Non TLS
+- name: mousevpn-$user-WS (CDN) Non TLS
   server: ${domain}
   port: 80
   type: vless
@@ -90,7 +89,7 @@ _______________________________________________________
 _______________________________________________________
               Format Vless gRPC (SNI)
 _______________________________________________________
-- name: Cendrawasih-$user-gRPC (SNI)
+- name: mousevpn-$user-gRPC (SNI)
   server: ${domain}
   port: 443
   type: vless
@@ -109,7 +108,7 @@ _______________________________________________________
         Format Vless WS (CDN) Non TLS Opok
 _______________________________________________________
 
-- name: Cendrawasih-$user-WS (CDN) Non TLS
+- name: mousevpn-$user-WS (CDN) Non TLS
   server: ${domain}
   port: 80
   type: vless
@@ -156,44 +155,44 @@ c=$(echo "${Quota}" | sed 's/[^0-9]*//g')
 d=$((${c} * 1024 * 1024 * 1024))
 
 if [[ ${c} != "0" ]]; then
-  echo "${d}" >/etc/cendrawasih/database/vless/${user}
+  echo "${d}" >/etc/mousevpn/database/vless/${user}
 fi
-DATADB=$(cat /etc/cendrawasih/database/vless/vless.db | grep "^###" | grep -w "${user}" | awk '{print $2}')
+DATADB=$(cat /etc/mousevpn/database/vless/vless.db | grep "^###" | grep -w "${user}" | awk '{print $2}')
 if [[ "${DATADB}" != '' ]]; then
-  sed -i "/\b${user}\b/d" /etc/cendrawasih/database/vless/vless.db
+  sed -i "/\b${user}\b/d" /etc/mousevpn/database/vless/vless.db
 fi
-echo "### ${user} ${exp} ${uuid}" >>/etc/cendrawasih/database/vless/vless.db
+echo "### ${user} ${exp} ${uuid}" >>/etc/mousevpn/database/vless/vless.db
 clear
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "\e[42m    Xray/Vless Account     \E[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Remarks     : ${user}" | tee -a /etc/cendrawasih/user.log
-echo -e "Domain      : ${domain}" | tee -a /etc/cendrawasih/user.log
-echo -e "Host Slowdns: ${NS}" | tee -a /etc/cendrawasih/user.log
-echo -e "Pub Key     : ${PUB}" | tee -a /etc/cendrawasih/user.log
-echo -e "Location    : $CITY" | tee -a /etc/cendrawasih/user.log
-echo -e "User Quota  : ${Quota} GB" | tee -a /etc/cendrawasih/user.log
-echo -e "port TLS    : 443" | tee -a /etc/cendrawasih/user.log
-echo -e "Port DNS    : 443, 53 " | tee -a /etc/cendrawasih/user.log
-echo -e "Port NTLS   : 80, 8080, 2086" | tee -a /etc/cendrawasih/user.log
-echo -e "User ID     : ${uuid}" | tee -a /etc/cendrawasih/user.log
-echo -e "Encryption  : none" | tee -a /etc/cendrawasih/user.log
-echo -e "Path TLS    : (/vlessws) (/vlessws-custom) " | tee -a /etc/cendrawasih/user.log
-echo -e "ServiceName : vless-grpc" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Link TLS   : ${vlesslink1}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Link NTLS  : ${vlesslink2}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Link GRPC  : ${vlesslink3}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Link OPOK  : ${vlesslink4}" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Format OpenClash : https://${domain}:81/vless-$user.txt" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "Expired On : $exp" | tee -a /etc/cendrawasih/user.log
-echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/cendrawasih/user.log
-echo -e "" | tee -a /etc/cendrawasih/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "\e[42m    Xray/Vless Account     \E[0m" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Remarks     : ${user}" | tee -a /etc/mousevpn/user.log
+echo -e "Domain      : ${domain}" | tee -a /etc/mousevpn/user.log
+echo -e "Host Slowdns: ${NS}" | tee -a /etc/mousevpn/user.log
+echo -e "Pub Key     : ${PUB}" | tee -a /etc/mousevpn/user.log
+echo -e "Location    : $CITY" | tee -a /etc/mousevpn/user.log
+echo -e "User Quota  : ${Quota} GB" | tee -a /etc/mousevpn/user.log
+echo -e "port TLS    : 443" | tee -a /etc/mousevpn/user.log
+echo -e "Port DNS    : 443, 53 " | tee -a /etc/mousevpn/user.log
+echo -e "Port NTLS   : 80, 8080, 2086" | tee -a /etc/mousevpn/user.log
+echo -e "User ID     : ${uuid}" | tee -a /etc/mousevpn/user.log
+echo -e "Encryption  : none" | tee -a /etc/mousevpn/user.log
+echo -e "Path TLS    : (/vlessws) (/vlessws-custom) " | tee -a /etc/mousevpn/user.log
+echo -e "ServiceName : vless-grpc" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Link TLS   : ${vlesslink1}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Link NTLS  : ${vlesslink2}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Link GRPC  : ${vlesslink3}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Link OPOK  : ${vlesslink4}" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Format OpenClash : https://${domain}:81/vless-$user.txt" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "Expired On : $exp" | tee -a /etc/mousevpn/user.log
+echo -e "\033[1;93m───────────────────────────\033[0m" | tee -a /etc/mousevpn/user.log
+echo -e "" | tee -a /etc/mousevpn/user.log
 read -n 1 -s -r -p "Press any key to back on menu"
 
 menu
