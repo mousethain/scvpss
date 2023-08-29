@@ -11,7 +11,7 @@ for user in "${data[@]}"; do
     exp2=$(((d1 - d2) / 86400))
     if [[ "$exp2" -le "0" ]]; then
         sed -i "/^#?# $user $exp/,/^},{/d" /etc/xray/config.json
-        sed -i "/$user/d" /etc/cendrawasih/database/vmess/vmess.db
+        sed -i "/$user/d" /etc/mousevpn/database/vmess/vmess.db
     fi
 done
 
@@ -25,7 +25,7 @@ for user in "${data[@]}"; do
     exp2=$(((d1 - d2) / 86400))
     if [[ "$exp2" -le "0" ]]; then
         sed -i "/^#& $user $exp/,/^},{/d" /etc/xray/config.json
-        sed -i "/$user/d" /etc/cendrawasih/database/vless/vless.db
+        sed -i "/$user/d" /etc/mousevpn/database/vless/vless.db
     fi
 done
 
@@ -39,7 +39,7 @@ for user in "${data[@]}"; do
     exp2=$(((d1 - d2) / 86400))
     if [[ "$exp2" -le "0" ]]; then
         sed -i "/^#! $user $exp/,/^},{/d" /etc/xray/config.json
-        sed -i "/$user/d" /etc/cendrawasih/database/trojan/trojan.db
+        sed -i "/$user/d" /etc/mousevpn/database/trojan/trojan.db
     fi
 done
 
@@ -53,7 +53,7 @@ for user in "${data[@]}"; do
     exp2=$(((d1 - d2) / 86400))
     if [[ "$exp2" -le "0" ]]; then
         sed -i "/^#ss# $user $exp/,/^},{/d" /etc/xray/config.json
-        sed -i "/$user/d" /etc/cendrawasih/database/shadowsocks/shadowsocks.db
+        sed -i "/$user/d" /etc/mousevpn/database/shadowsocks/shadowsocks.db
     fi
 done
 systemctl restart xray
