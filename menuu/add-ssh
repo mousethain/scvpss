@@ -24,9 +24,9 @@ DATADB=$(cat /etc/mousevpn/database/ssh/ssh.db | grep "^###" | grep -w "${LOGIN}
 if [[ "${DATADB}" != '' ]]; then
   sed -i "/\b${LOGIN}\b/d" /etc/mousevpn/database/ssh/ssh.db
 fi
-echo "### ${LOGIN} " >>/etc/cendrawasih/database/ssh/ssh.db
+echo "### ${LOGIN} " >>/etc/mousevpn/database/ssh/ssh.db
 
-cat > /etc/cendrawasih/public_html/ssh-$LOGIN.txt <<-END
+cat > /etc/mousevpn/public_html/ssh-$LOGIN.txt <<-END
 ====================================================================
                             MouseVpn
 ====================================================================
