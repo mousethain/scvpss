@@ -29,7 +29,7 @@ TIME=$(date +'%Y-%m-%d %H:%M:%S')
 RAMMS=$(free -m | awk 'NR==2 {print $2}')
 REPO="https://raw.githubusercontent.com/mousethain/scvpss/master/"
 APT="apt-get -y install "
-domain=$(cat /etc/mousevpndom/domain)
+domain=$(cat /etc/mousevpn/domain)
 start=$(date +%s)
 secs_to_human() {
     echo "Installation time : $((${1} / 3600)) hours $(((${1} / 60) % 60)) minute's $((${1} % 60)) seconds"
@@ -133,14 +133,14 @@ function add_domain() {
     echo "`cat /etc/banner`"
     read -rp "Input Your Domain For This Server:" -e SUB_DOMAIN
     echo "Host : $SUB_DOMAIN"
-    echo $SUB_DOMAIN > /etc/mousevpndom/domain
-    cp /etc/mousevpndom/domain /etc/xray/domain
+    echo $SUB_DOMAIN > /etc/mousevpn/domain
+    cp /etc/mousevpn/domain /etc/xray/domain
 }
 
 ### Pasang SSL
 function pasang_ssl() {
     print_install "Memasang SSL pada domain"
-    domain=$(cat /etc/mousevpndom/domain)
+    domain=$(cat /etc/mousevpn/domain)
     STOPWEBSERVER=$(lsof -i:80 | cut -d' ' -f1 | awk 'NR==2 {print $1}')
     rm -rf /root/.acme.sh
     mkdir /root/.acme.sh
