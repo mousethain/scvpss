@@ -13,7 +13,7 @@ PASS = ''
 BUFLEN = 4096 * 4
 TIMEOUT = 60
 DEFAULT_HOST = '127.0.0.1:39'
-RESPONSE = 'HTTP/1.1 101 <b><font color="red">Cendrawasih Tunnel</font></b>\r\n\r\n'
+RESPONSE = 'HTTP/1.1 101 <b><font color="red">MouseVpn</font></b>\r\n\r\n'
 
 class Server(threading.Thread):
     def __init__(self, host, port):
