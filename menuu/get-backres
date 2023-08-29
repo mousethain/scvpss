@@ -1,12 +1,12 @@
 #!/bin/bash
 # //====================================================
 # //	System Request:Debian 9+/Ubuntu 18.04+/20+
-# //	Author:	bhoikfostyahya
+# //	Author:	mousevpn
 # //	Dscription: Xray Menu Management
-# //	email: admin@bhoikfostyahya.com
-# //  telegram: https://t.me/bhoikfost_yahya
+# //	email: mousethain@gmail.com
+# //  telegram: https://t.me/mousethain
 # //====================================================
-# // font color configuration | BHOIKFOST YAHYA AUTOSCRIPT
+# // font color configuration | MouseVpn AUTOSCRIPT
 clear
 red() { echo -e "\\033[32;1m${*}\\033[0m"; }
 IP=$(curl -s ipv4.icanhazip.com)
@@ -52,9 +52,9 @@ function BACKUPVPS() {
     cp /etc/shadow backup/
     cp /etc/gshadow backup/
     cp -r /var/www/html backup/html
-    zip -r -pCendrawasihTunnel CendrawasihTunnel-${DATEVPS}.zip backup >/dev/null 2>&1
-    rclone copy CendrawasihTunnel-${DATEVPS}.zip dr:CendrawasihTunnel/
-    url=$(rclone link dr:CendrawasihTunnel-${DATEVPS}.zip)
+    zip -r -pMouseVpnTunnel MouseVpn-${DATEVPS}.zip backup >/dev/null 2>&1
+    rclone copy MouseVpnTunnel-${DATEVPS}.zip dr:MouseVpnTunnel/
+    url=$(rclone link dr:MouseVpnTunnel-${DATEVPS}.zip)
     id=($(echo $url | grep '^https' | cut -d'=' -f2))
     LINKBACKUP="https://drive.google.com/u/4/uc?id=${id}&export=download"
     rm -rf *
@@ -71,11 +71,11 @@ LOCATION    : $CITY
 LINK BACKUP : $LINKBACKUP
 _______________________________________
 
-© Copyright By https://github.com/rullpqh
-Busines email : bhoikfostyahya@gmail.com
-Report bugs   : https://t.me/bhoikfost_yahya
-            CendrawasihTunnel
-    " | mail -s "CendrawasihTunnel Backup" $EMAIL
+© Copyright By https://github.com/mousethain
+Busines email : mousethain@gmail.com
+Report bugs   : https://t.me/mousethain
+            MouseVpnTunnel
+    " | mail -s "MouseVpnTunnel Backup" $EMAIL
     clear
     echo -e "\033[1;93m─────────────────────────────────────────\033[0m"
     echo -e "SUCCESSFULL BACKUP YOUR VPS"
@@ -93,8 +93,8 @@ Report bugs   : https://t.me/bhoikfost_yahya
 }
 
 function RESTOREVPS() {
-    wget -O CendrawasihTunnel.zip "$DATAVPS" >/dev/null 2>&1
-    7z e -pCendrawasihTunnel *.zip >/dev/null 2>&1
+    wget -O MouseVpnTunnel.zip "$DATAVPS" >/dev/null 2>&1
+    7z e -pMouseVpnTunnel *.zip >/dev/null 2>&1
     #unzip *.zip >/dev/null 2>&1
     rm -f *.zip >/dev/null 2>&1
     cd /root/backup
