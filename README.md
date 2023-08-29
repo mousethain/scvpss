@@ -1,7 +1,3 @@
-<h1 align="center">
-  <a href="https://github.com/manssizz/scriptvps"><img src="https://github.com/Manssizz/scriptvps/raw/master/assets/logo.png" alt="LOGO"></a>
-</h1>
-
 ### PERHATIAN
 - Terima kasih untuk tidak menjual maupun mengenkripsi skrip ini. Saya mendapatkan secara gratis, jadi saya ataupun kalian harus berbagi secara gratis.
 - Script ini **tidak direkomendasikan untuk bermain game**.
@@ -15,13 +11,6 @@
 ### TESTED ON OS 
 - UBUNTU 20.04.05
 
-### FITUR TAMBAHAN
-- Tambah Swap 1GiB
-- Pemasangan yang dinamis
-- Tuning profile pada server
-- Xray Core by [@dharak36](https://github.com/dharak36/Xray-core)
-- Penambahan fail2ban
-- Penggunaan [Tiarap](https://github.com/pengelana/blocklist) sebagai dns resolver.
 
 ### PORT INFO
 ```
@@ -66,9 +55,3 @@
 ### STATUS
 `Beta Testing`
 
-### Lisensi
-Repository ini dilindungi oleh lisensi [MIT](https://mit-license.org/)
-
-### Credits
-- [Dharak36](https://github.com/dharak36/Xray-core)
-- [Tiarap](https://github.com/pengelana/blocklist)
