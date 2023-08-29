@@ -315,10 +315,10 @@ function pasang_rclone() {
 ### Ambil Konfig
 function download_config(){
     print_install "Memasang konfigurasi paket konfigurasi"
-    wget -O /etc/nginx/conf.d/cendrawasih.conf "${REPO}config/cendrawasih.conf" >/dev/null 2>&1
-    sed -i "s/xxx/${domain}/g" /etc/nginx/conf.d/cendrawasih.conf
+    wget -O /etc/nginx/conf.d/mousevpn.conf "${REPO}config/mousevpn.conf" >/dev/null 2>&1
+    sed -i "s/xxx/${domain}/g" /etc/nginx/conf.d/mousevpn.conf
     wget -O /etc/nginx/nginx.conf "${REPO}config/nginx.conf" >/dev/null 2>&1
-    wget -O /etc/cendrawasih/.version "${REPO}version" >/dev/null 2>&1
+    wget -O /etc/mousevpn/.version "${REPO}version" >/dev/null 2>&1
 
     wget -q -O /etc/squid/squid.conf "${REPO}config/squid.conf" >/dev/null 2>&1
     echo "visible_hostname $(cat /etc/xray/domain)" /etc/squid/squid.conf
@@ -346,7 +346,7 @@ function download_config(){
     mkdir /tmp/tema
     7z e  /tmp/tema-master.zip -o/tmp/tema/ >/dev/null 2>&1
     chmod +x /tmp/tema/*
-    mv /tmp/tema/* /etc/cendrawasih/theme/    
+    mv /tmp/tema/* /etc/mousevpn/theme/    
 
     # > Vnstat
     vnstat -u -i $NET
@@ -454,8 +454,8 @@ function tambahan(){
     tuned-adm profile network-latency
 
     # > Homepage
-    wget -O /etc/cendrawasih/public_html/index.html ${REPO}website/index.html >/dev/null 2>&1
-    wget -O /etc/cendrawasih/public_html/style.css ${REPO}website/style.css >/dev/null 2>&1
+    wget -O /etc/mousevpn/public_html/index.html ${REPO}website/index.html >/dev/null 2>&1
+    wget -O /etc/mousevpn/public_html/style.css ${REPO}website/style.css >/dev/null 2>&1
 
     cat >/etc/msmtprc <<EOF
 defaults
@@ -475,7 +475,7 @@ EOF
 
 cat <<EOT > /etc/motd
 ========================================================
-                Cendrawasih Tunnel
+                mousevpn Tunnel
 Dengan menggunakan script ini, anda menyetujui jika:
 - Script ini tidak diperjual belikan
 - Script ini tidak digunakan untuk aktifitas ilegal
@@ -515,14 +515,14 @@ chmod 644 /root/.profile
 
 
 ########## SETUP FROM HERE ##########
-#####       Cendrawasih         #####
+#####       ..mousevpn..        #####
 #####################################
 echo "INSTALLING SCRIPT..."
 
 cat >/root/tmp <<-END
 #!/bin/bash
 #vps
-### CendrawasihTunnel $TANGGAL $MYIP
+### MouseVpnTunnel $TANGGAL $MYIP
 END
 
 function enable_services(){
@@ -555,53 +555,53 @@ function install_all() {
     # dir_xray
     # add_domain
     pasang_ssl 
-    install_xray >> /etc/cendrawasih/install.log
-    install_stunnel >> /etc/cendrawasih/install.log
-    install_websocket >> /etc/cendrawasih/install.log
-    install_ovpn >> /etc/cendrawasih/install.log
-    install_slowdns >> /etc/cendrawasih/install.log
-    download_config >> /etc/cendrawasih/install.log
-    enable_services >> /etc/cendrawasih/install.log
-    tambahan >> /etc/cendrawasih/install.log
-    pasang_rclone >> /etc/cendrawasih/install.log
+    install_xray >> /etc/mousevpn/install.log
+    install_stunnel >> /etc/mousevpn/install.log
+    install_websocket >> /etc/mousevpn/install.log
+    install_ovpn >> /etc/mousevpn/install.log
+    install_slowdns >> /etc/mousevpn/install.log
+    download_config >> /etc/mousevpn/install.log
+    enable_services >> /etc/mousevpn/install.log
+    tambahan >> /etc/mousevpn/install.log
+    pasang_rclone >> /etc/mousevpn/install.log
 }
 
 function finish(){
     sed -i "s/xxx/${MYIP}/g" /etc/squid/squid.conf
-    chown -R cendrawasih:cendrawasih /etc/msmtprc
+    chown -R mousevpn:mousevpn /etc/msmtprc
 
 
     # > Bersihkan History
     alias bash2="bash --init-file <(echo '. ~/.bashrc; unset HISTFILE')"
     clear
-    echo "    ┌─────────────────────────────────────────────────────┐" | tee -a /etc/cendrawasih/install.log
-    echo "    │       >>> Service & Port                            │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - OpenSSH                 : 22                    │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - DNS (SLOWDNS)           : 443, 80, 53           │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - Dropbear                : 109, 143              │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - Dropbear Websocket      : 443, 109, 39          │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - SSH Websocket SSL       : 443                   │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - SSH Websocket           : 80                    │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - OpenVPN SSL             : 443, 1194             │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - OpenVPN Websocket SSL   : 443                   │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - OpenVPN TCP             : 1194                  │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - OpenVPN UDP             : 2200                  │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - Nginx Webserver         : 81                    │" | tee -a /etc/cendrawasih/install.log
-#    echo "    │   - Haproxy Loadbalancer    : 443, 80               │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - DNS Server              : 443, 53               │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - DNS Client              : 443, 88               │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - XRAY DNS (SLOWDNS)      : 443, 80, 53           │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - XRAY Vmess TLS          : 443                   │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - XRAY Vmess gRPC         : 443                   │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - XRAY Vmess None TLS     : 80                    │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - XRAY Vless TLS          : 443                   │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - XRAY Vless gRPC         : 443                   │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - XRAY Vless None TLS     : 80                    │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - Trojan gRPC             : 443                   │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - Trojan WS               : 443                   │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - Shadowsocks WS          : 443                   │" | tee -a /etc/cendrawasih/install.log
-    echo "    │   - Shadowsocks gRPC        : 443                   │" | tee -a /etc/cendrawasih/install.log
-    echo "    └─────────────────────────────────────────────────────┘" | tee -a /etc/cendrawasih/install.log
+    echo "    ┌─────────────────────────────────────────────────────┐" | tee -a /etc/mousevpn/install.log
+    echo "    │       >>> Service & Port                            │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - OpenSSH                 : 22                    │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - DNS (SLOWDNS)           : 443, 80, 53           │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - Dropbear                : 109, 143              │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - Dropbear Websocket      : 443, 109, 39          │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - SSH Websocket SSL       : 443                   │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - SSH Websocket           : 80                    │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - OpenVPN SSL             : 443, 1194             │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - OpenVPN Websocket SSL   : 443                   │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - OpenVPN TCP             : 1194                  │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - OpenVPN UDP             : 2200                  │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - Nginx Webserver         : 81                    │" | tee -a /etc/mousevpn/install.log
+#    echo "    │   - Haproxy Loadbalancer    : 443, 80               │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - DNS Server              : 443, 53               │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - DNS Client              : 443, 88               │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - XRAY DNS (SLOWDNS)      : 443, 80, 53           │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - XRAY Vmess TLS          : 443                   │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - XRAY Vmess gRPC         : 443                   │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - XRAY Vmess None TLS     : 80                    │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - XRAY Vless TLS          : 443                   │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - XRAY Vless gRPC         : 443                   │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - XRAY Vless None TLS     : 80                    │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - Trojan gRPC             : 443                   │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - Trojan WS               : 443                   │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - Shadowsocks WS          : 443                   │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - Shadowsocks gRPC        : 443                   │" | tee -a /etc/mousevpn/install.log
+    echo "    └─────────────────────────────────────────────────────┘" | tee -a /etc/mousevpn/install.log
     echo "    ┌─────────────────────────────────────────────────────┐"
     echo "    │                                                     │"
     echo "    │      >>> Server Information & Other Features        │"
