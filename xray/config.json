@@ -22,7 +22,7 @@
           "decryption":"none",
             "clients": [
                {
-                 "id": "C3ndrawasih"
+                 "id": "MouseVpn"
 #vless
              }
           ]
@@ -41,7 +41,7 @@
       "settings": {
             "clients": [
                {
-                 "id": "C3ndrawasih",
+                 "id": "MouseVpn",
                  "alterId": 0
 #vmess
              }
@@ -62,7 +62,7 @@
           "decryption":"none",
            "clients": [
               {
-                 "password": "C3ndrawasih"
+                 "password": "MouseVpn"
 #trojanws
               }
           ],
@@ -83,7 +83,7 @@
            "clients": [
            {
            "method": "aes-128-gcm",
-          "password": "C3ndrawasih"
+          "password": "MouseVpn"
 #ssws
            }
           ],
@@ -104,7 +104,7 @@
          "decryption":"none",
            "clients": [
              {
-               "id": "C3ndrawasih"
+               "id": "MouseVpn"
 #vlessgrpc
              }
           ]
@@ -123,7 +123,7 @@
       "settings": {
             "clients": [
                {
-                 "id": "C3ndrawasih",
+                 "id": "MouseVpn",
                  "alterId": 0
 #vmessgrpc
              }
@@ -144,7 +144,7 @@
           "decryption":"none",
              "clients": [
                {
-                 "password": "C3ndrawasih"
+                 "password": "MouseVpn"
 #trojangrpc
                }
            ]
@@ -164,7 +164,7 @@
         "clients": [
           {
              "method": "aes-128-gcm",
-             "password": "C3ndrawasih"
+             "password": "MouseVpn"
 #ssgrpc
            }
          ],
