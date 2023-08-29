@@ -18,6 +18,6 @@ export COLBG1="$(cat /etc/mousevpn/theme/$colornow | grep -w "BG" | cut -d: -f2|
 
 # sleep 2
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Download Changelog File"
-wget -q -O /etc/mousevpn/changelog.md "https://raw.githubusercontent.com/mousethain/scvpss/main/master/server/changelog.md" 
+wget -q -O /etc/mousevpn/changelog.md "https://raw.githubusercontent.com/mousethain/scvpss/master/master/server/changelog.md" 
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Read Changelog? ./root/changelog.txt"
 sleep 2
