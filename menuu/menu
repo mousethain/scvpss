@@ -1,12 +1,12 @@
 #!/bin/bash
 # //====================================================
 # //	System Request:Debian 9+/Ubuntu 18.04+/20+
-# //	Author:	bhoikfostyahya
+# //	Author:	mousevpn
 # //	Dscription: Xray Menu Management
-# //	email: admin@bhoikfostyahya.com
-# //  telegram: https://t.me/bhoikfost_yahya
+# //	email: mousethain@gmail.com
+# //  telegram: https://t.me/mousethain
 # //====================================================
-# // font color configuration | BHOIKFOST YAHYA AUTOSCRIPT
+# // font color configuration | MouseVpn AUTOSCRIPT
 # COLOR VALIDATION
 clear
 RED='\033[0;31m'
@@ -28,65 +28,65 @@ LOADCPU=$(printf '%-0.00001s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }
 MODEL=$(cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g')
 CORE=$(printf '%-1s' "$(grep -c cpu[0-9] /proc/stat)")
 Exp="Never Expired"
-Name="Cendrawasih Tunnel"
+Name="MouseVpn Tunnel"
 DATEVPS=$(date +'%d/%m/%Y')
 TIMEZONE=$(printf '%(%H:%M:%S)T')
 SERONLINE=$(uptime -p | cut -d " " -f 2-10000)
-if [ ! -e /etc/cendrawasih/database/vmess ]; then
-    mkdir -p /etc/cendrawasih/database/vmess
-    touch /etc/cendrawasih/database/vmess/vmess.db
+if [ ! -e /etc/mousevpn/database/vmess ]; then
+    mkdir -p /etc/mousevpn/database/vmess
+    touch /etc/mousevpn/database/vmess/vmess.db
 fi
-vms=$(cat /etc/cendrawasih/database/vmess/vmess.db)
+vms=$(cat /etc/mousevpn/database/vmess/vmess.db)
 if [[ $vms = "" ]]; then
     vm="0"
 else
-    vm=$(cat /etc/cendrawasih/database/vmess/vmess.db | grep "###" | wc -l)
+    vm=$(cat /etc/mousevpn/database/vmess/vmess.db | grep "###" | wc -l)
 fi
 
-if [ ! -e /etc/cendrawasih/database/vless ]; then
-    mkdir -p /etc/cendrawasih/database/vless
-    touch /etc/cendrawasih/database/vless/vless.db
+if [ ! -e /etc/mousevpn/database/vless ]; then
+    mkdir -p /etc/mousevpn/database/vless
+    touch /etc/mousevpn/database/vless/vless.db
 fi
-vms=$(cat /etc/cendrawasih/database/vless/vless.db)
+vms=$(cat /etc/mousevpn/database/vless/vless.db)
 if [[ $vms = "" ]]; then
     vl="0"
 else
-    vl=$(cat /etc/cendrawasih/database/vless/vless.db | grep "###" | wc -l)
+    vl=$(cat /etc/mousevpn/database/vless/vless.db | grep "###" | wc -l)
 fi
 
-if [ ! -e /etc/cendrawasih/database/trojan ]; then
-    mkdir -p /etc/cendrawasih/database/trojan
-    touch /etc/cendrawasih/database/trojan/trojan.db
+if [ ! -e /etc/mousevpn/database/trojan ]; then
+    mkdir -p /etc/mousevpn/database/trojan
+    touch /etc/mousevpn/database/trojan/trojan.db
 fi
-vms=$(cat /etc/cendrawasih/database/trojan/trojan.db)
+vms=$(cat /etc/mousevpn/database/trojan/trojan.db)
 if [[ $vms = "" ]]; then
     tr="0"
 else
-    tr=$(cat /etc/cendrawasih/database/trojan/trojan.db | grep "###" | wc -l)
+    tr=$(cat /etc/mousevpn/database/trojan/trojan.db | grep "###" | wc -l)
 fi
-if [ ! -e /etc/cendrawasih/database/shadowsocks ]; then
-    mkdir -p /etc/cendrawasih/database/shadowsocks
-    touch /etc/cendrawasih/database/shadowsocks/shadowsocks.db
+if [ ! -e /etc/mousevpn/database/shadowsocks ]; then
+    mkdir -p /etc/mousevpn/database/shadowsocks
+    touch /etc/mousevpn/database/shadowsocks/shadowsocks.db
 fi
-vms=$(cat /etc/cendrawasih/database/shadowsocks/shadowsocks.db)
+vms=$(cat /etc/mousevpn/database/shadowsocks/shadowsocks.db)
 if [[ $vms = "" ]]; then
     ss="0"
 else
-    ss=$(cat /etc/cendrawasih/database/shadowsocks/shadowsocks.db | grep "###" | wc -l)
+    ss=$(cat /etc/mousevpn/database/shadowsocks/shadowsocks.db | grep "###" | wc -l)
 fi
-if [ ! -e /etc/cendrawasih/database/ssh ]; then
-    mkdir -p /etc/cendrawasih/database/ssh
-    touch /etc/cendrawasih/database/ssh/ssh.db
+if [ ! -e /etc/mousevpn/database/ssh ]; then
+    mkdir -p /etc/mousevpn/database/ssh
+    touch /etc/mousevpn/database/ssh/ssh.db
 fi
-vms=$(cat /etc/cendrawasih/database/ssh/ssh.db)
+vms=$(cat /etc/mousevpn/database/ssh/ssh.db)
 if [[ $vms = "" ]]; then
     ssh="0"
 else
-    ssh=$(cat /etc/cendrawasih/database/ssh/ssh.db | grep "###" | wc -l)
+    ssh=$(cat /etc/mousevpn/database/ssh/ssh.db | grep "###" | wc -l)
 fi
 clear
 echo -e "\033[1;93m─────────────────────────────────────────\033[0m"
-echo -e "\033[42m           CENDRAWASIH TUNNEL            \033[0m"
+echo -e "\033[42m           MouseVpn TUNNEL            \033[0m"
 echo -e "\033[1;93m─────────────────────────────────────────\033[0m"
 echo -e " ${YELL}System OS${NC}     : \033[0;32m$MODEL${NC}"
 echo -e " ${YELL}RAM${NC}           : \033[0;32m$USAGERAM/$RAM MB ($MEMOFREE) $NC"
