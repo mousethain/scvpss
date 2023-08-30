@@ -1,0 +1,3 @@
+#THEME MAGENTA
+BG : \E[40;1;43m
+TEXT : \033[0;33m
