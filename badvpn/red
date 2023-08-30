@@ -1,3 +1,0 @@
-#THEME RED
-BG : \E[40;1;41m
-TEXT : \033[0;31m
