@@ -5,7 +5,7 @@
 - Jika mendapatkan error pada status servis dalam jangka panjang, bisa restart servis yang dead.
 
 ### INSTALL SCRIPT
-<pre><code>apt install -y wget screen && wget -q https://raw.githubusercontent.com/mousethain/scvpss/master/main.sh && chmod +x main.sh && screen -S install ./main.sh<code><pre>
+<pre><code>apt install -y wget screen && wget -q https://raw.githubusercontent.com/mousethain/scvpss/master/main.sh && chmod +x main.sh && screen -S install ./main.sh</code></pre>
 
 
  
