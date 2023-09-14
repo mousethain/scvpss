@@ -378,7 +378,8 @@ cat >/home/daily_reboot <<EOF
 5
 EOF
 
-cat >/etc/systemd/system/rc-local.service <<EOF
+cd
+cat > /etc/systemd/system/rc-local.service <<-END
 [Unit]
 Description=/etc/rc.local
 ConditionPathExists=/etc/rc.local
@@ -388,24 +389,23 @@ ExecStart=/etc/rc.local start
 TimeoutSec=0
 StandardOutput=tty
 RemainAfterExit=yes
+SysVStartPriority=99
 [Install]
 WantedBy=multi-user.target
-EOF
-
-echo "/bin/false" >>/etc/shells
-echo "/usr/sbin/nologin" >>/etc/shells
-cat >/etc/rc.local <<EOF
+END
+cat > /etc/rc.local <<-END
 #!/bin/sh -e
 # rc.local
 # By default this script does nothing.
-iptables -I INPUT -p udp --dport 5300 -j ACCEPT
-iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 5300
-/bin/bash /usr/sbin/ssh-ws
-#/proc/sys/net/ipv6/conf/all/disable_ipv6
-# systemctl restart netfilter-persistent
 exit 0
-EOF
-    chmod +x /etc/rc.local
+END
+chmod +x /etc/rc.local
+systemctl enable rc-local
+systemctl start rc-local.service
+echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
+sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
+ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
     print_ok "Konfigurasi file selesai"
 }
 
