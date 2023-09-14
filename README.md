@@ -7,6 +7,8 @@
 ### INSTALL SCRIPT
 <pre><code>apt install -y wget screen && wget -q https://raw.githubusercontent.com/mousethain/scvpss/master/main.sh && chmod +x main.sh && screen -S install ./main.sh<code><pre>
 
+
+ 
 ### TESTED ON OS 
 - UBUNTU 20.04.05
 
