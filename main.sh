@@ -33,7 +33,22 @@ domain=$(cat /etc/mousevpn/domain)
 start=$(date +%s)
 secs_to_human() {
     echo "Installation time : $((${1} / 3600)) hours $(((${1} / 60) % 60)) minute's $((${1} % 60)) seconds"
+}
+### Status
+function print_ok() {
+    echo -e "${OK} ${BLUE} $1 ${FONT}"
+}
 
+function print_error() {
+    echo -e "${ERROR} ${REDBG} $1 ${FONT}"
+}
+
+function print_success() {
+    if [[ 0 -eq $? ]]; then
+        print_ok "$1 Complete Installing"
+        sleep 1
+    fi
+}
 
 ### Cek root
 function is_root() {
@@ -44,7 +59,18 @@ function is_root() {
     fi
 
 }
+### Change Environment System
+function first_setup(){
+    timedatectl set-timezone Asia/Jakarta
+    wget -O /etc/banner ${REPO}config/banner >/dev/null 2>&1
+    chmod +x /etc/banner
+    wget -O /etc/ssh/sshd_config ${REPO}config/sshd_config >/dev/null 2>&1
+    chmod 644 /etc/ssh/sshd_config
 
+    echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
+    echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
+    
+}
 ### Update and remove packages
 function base_package() {
     sudo apt --purge remove git man-db apache2 ufw exim4 firewalld snapd* apparmor bind9 -y;
