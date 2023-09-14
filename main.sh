@@ -587,7 +587,7 @@ function finish(){
     echo "    │   - OpenVPN TCP             : 1194                  │" | tee -a /etc/mousevpn/install.log
     echo "    │   - OpenVPN UDP             : 2200                  │" | tee -a /etc/mousevpn/install.log
     echo "    │   - Nginx Webserver         : 81                    │" | tee -a /etc/mousevpn/install.log
-#    echo "    │   - Haproxy Loadbalancer    : 443, 80               │" | tee -a /etc/mousevpn/install.log
+    echo "    │   - Haproxy Loadbalancer    : 443, 80               │" | tee -a /etc/mousevpn/install.log
     echo "    │   - DNS Server              : 443, 53               │" | tee -a /etc/mousevpn/install.log
     echo "    │   - DNS Client              : 443, 88               │" | tee -a /etc/mousevpn/install.log
     echo "    │   - XRAY DNS (SLOWDNS)      : 443, 80, 53           │" | tee -a /etc/mousevpn/install.log
@@ -621,15 +621,5 @@ function finish(){
     # else
     #     reboot
     # fi
-}
-cd /tmp
-unset HISTFILE
-first_setup
-dir_xray
-add_domain
-install_all
-finish  
-
-rm /root/.bash_history
 sleep 10
 reboot
