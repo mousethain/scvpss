@@ -33,30 +33,7 @@ domain=$(cat /etc/mousevpn/domain)
 start=$(date +%s)
 secs_to_human() {
     echo "Installation time : $((${1} / 3600)) hours $(((${1} / 60) % 60)) minute's $((${1} % 60)) seconds"
-}
-### Status
-function print_ok() {
-    echo -e "${OK} ${BLUE} $1 ${FONT}"
-}
-function print_install() {
-	echo -e "${YELLOW} ============================================ ${FONT}"
-    echo -e "${YELLOW} # $1 ${FONT}"
-	echo -e "${YELLOW} ============================================ ${FONT}"
-    sleep 1
-}
 
-function print_error() {
-    echo -e "${ERROR} ${REDBG} $1 ${FONT}"
-}
-
-function print_success() {
-    if [[ 0 -eq $? ]]; then
-		echo -e "${Green} ============================================ ${FONT}"
-        echo -e "${Green} # $1 berhasil dipasang"
-		echo -e "${Green} ============================================ ${FONT}"
-        sleep 2
-    fi
-}
 
 ### Cek root
 function is_root() {
