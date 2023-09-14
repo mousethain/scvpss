@@ -581,5 +581,7 @@ function finish(){
     # else
     #     reboot
     # fi
+
+ }
 sleep 10
 reboot
