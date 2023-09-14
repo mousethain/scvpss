@@ -68,23 +68,6 @@ function is_root() {
 
 }
 
-### Change Environment System
-function first_setup(){
-    echo 'set +o history' >> /etc/profile
-    timedatectl set-timezone Asia/Jakarta
-    wget -O /etc/banner ${REPO}config/banner >/dev/null 2>&1
-    chmod +x /etc/banner
-    wget -O /etc/ssh/sshd_config ${REPO}config/sshd_config >/dev/null 2>&1
-    wget -q -O /etc/ipserver "${REPO}server/ipserver" && bash /etc/ipserver >/dev/null 2>&1
-    chmod 644 /etc/ssh/sshd_config
-    useradd -M mousevpn
-    usermod -aG sudo,mousevpn mousevpn
-
-    echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
-    echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
-}
-
-
 ### Update and remove packages
 function base_package() {
     sudo apt --purge remove git man-db apache2 ufw exim4 firewalld snapd* apparmor bind9 -y;
